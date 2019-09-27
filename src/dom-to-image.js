@@ -228,6 +228,10 @@
                 });
 
             function cloneStyle() {
+                if (clone.style === undefined) {
+                    return;
+                }
+
                 copyStyle(window.getComputedStyle(original), clone.style);
 
                 function copyStyle(source, target) {
@@ -748,6 +752,10 @@
                 });
 
             function inlineBackground(node) {
+                if (typeof node.style === 'undefined') {
+                    return Promise.resolve(node);
+                }
+
                 var background = node.style.getPropertyValue('background');
 
                 if (!background) return Promise.resolve(node);
